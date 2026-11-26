@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -8,8 +7,7 @@
 
     <title>Resultado | TechExpert</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
@@ -31,56 +29,76 @@
 
             {% if diagnosticos %}
 
-                <p>O TechExpert identificou as seguintes possibilidades:</p>
+            <p>O TechExpert identificou as seguintes possibilidades:</p>
 
-                {% for diagnostico in diagnosticos %}
+            {% for diagnostico in diagnosticos %}
 
-                    <div class="resultado-card">
+            <div class="resultado-card">
 
-                        <h3>{{ diagnostico.descricao }}</h3>
+                <h3>{{ diagnostico.descricao }}</h3>
 
-                        {% for item in historico %}
 
-                            {% if item.conclusao == diagnostico.identificador %}
+                {% for item in historico %}
 
-                                <p>
-                                    <strong>Regra aplicada:</strong>
-                                    {{ item.regra }}
-                                </p>
+                {% if item.conclusao == diagnostico.identificador %}
 
-                                <p>
-                                    <strong>Explicação:</strong>
-                                    {{ item.explicacao }}
-                                </p>
+                <div class="explicacao-regra">
 
-                                <p>
-                                    <strong>Recomendação:</strong>
-                                    {{ item.recomendacao }}
-                                </p>
+                    <h4>Regra aplicada: {{ item.regra }}</h4>
 
-                            {% endif %}
+                    <p>
+                        <strong>Como o sistema chegou a essa conclusão:</strong>
+                    </p>
+
+                    <ul class="lista-fatos">
+
+                        {% for condicao in item.condicoes_detalhadas %}
+
+                        <li>
+                            {{ condicao.descricao }}:
+                            <strong>{{ condicao.valor }}</strong>
+                        </li>
 
                         {% endfor %}
 
-                    </div>
+                    </ul>
+
+                    <p>
+                        <strong>Explicação:</strong>
+                        {{ item.explicacao }}
+                    </p>
+
+                    <p>
+                        <strong>Recomendação:</strong>
+                        {{ item.recomendacao }}
+                    </p>
+
+                </div>
+
+                {% endif %}
 
                 {% endfor %}
 
+
+            </div>
+
+            {% endfor %}
+
             {% else %}
 
-                <div class="resultado-card">
-                    <h3>Nenhuma conclusão específica foi encontrada.</h3>
+            <div class="resultado-card">
+                <h3>Nenhuma conclusão específica foi encontrada.</h3>
 
-                    <p>
-                        As respostas fornecidas não satisfizeram
-                        as condições de nenhuma regra diagnóstica.
-                    </p>
+                <p>
+                    As respostas fornecidas não satisfizeram
+                    as condições de nenhuma regra diagnóstica.
+                </p>
 
-                    <p>
-                        Recomendamos procurar uma avaliação técnica
-                        para investigar o problema.
-                    </p>
-                </div>
+                <p>
+                    Recomendamos procurar uma avaliação técnica
+                    para investigar o problema.
+                </p>
+            </div>
 
             {% endif %}
 
@@ -108,4 +126,5 @@
     </footer>
 
 </body>
+
 </html>

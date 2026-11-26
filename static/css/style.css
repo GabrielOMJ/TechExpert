@@ -236,3 +236,27 @@ footer {
         font-size: 18px;
     }
 }
+.explicacao-regra {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid #d5e3f1;
+}
+
+.explicacao-regra h4 {
+    color: #1769aa;
+    margin-bottom: 15px;
+}
+
+.explicacao-regra p {
+    margin-bottom: 12px;
+}
+
+.lista-fatos {
+    margin: 12px 0 20px 25px;
+    color: #596779;
+    line-height: 1.8;
+}
+
+.lista-fatos li {
+    margin-bottom: 5px;
+}

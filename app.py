@@ -1,3 +1,4 @@
+import os
 
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 
@@ -19,8 +20,10 @@ app = Flask(__name__)
 
 # Chave provisória para utilizar sessões durante o desenvolvimento.
 # Posteriormente, podemos configurar uma chave segura por variável de ambiente.
-app.secret_key = "tech-expert-chave-desenvolvimento"
-
+app.secret_key = os.environ.get(
+    "SECRET_KEY",
+    "chave-provisoria-apenas-desenvolvimento"
+)
 
 @app.route("/")
 def inicio():
@@ -79,10 +82,28 @@ def questionario():
             for fato in resultado["diagnosticos"]
         ]
 
+        # Prepara as condições utilizadas por cada regra.
+        historico_detalhado = []
+
+        for item in resultado["historico"]:
+
+            explicacao = item.copy()
+
+            explicacao["condicoes_detalhadas"] = [
+            {
+                "descricao": obter_descricao(fato),
+                "valor": "Sim" if valor is True else "Não"
+            }
+            for fato, valor in item["condicoes"].items()
+        ]
+
+            historico_detalhado.append(explicacao)
+
+
         return render_template(
             "resultado.html",
             diagnosticos=diagnosticos,
-            historico=resultado["historico"],
+            historico=historico_detalhado,
             categoria=CATEGORIAS_QUESTIONARIO[categoria]
         )
 
@@ -96,11 +117,15 @@ def questionario():
     )
 
 
+
 @app.route("/responder", methods=["POST"])
 def responder():
 
     if "categoria" not in session:
         return redirect(url_for("iniciar"))
+
+    categoria = session["categoria"]
+    respostas = session.get("respostas", {})
 
     fato = request.form.get("fato")
     resposta = request.form.get("resposta")
@@ -109,7 +134,15 @@ def responder():
         flash("Selecione uma resposta válida.")
         return redirect(url_for("questionario"))
 
-    respostas = session.get("respostas", {})
+    # Verifica se a pergunta enviada é realmente a próxima pergunta.
+    proxima_pergunta = obter_proxima_pergunta(categoria, respostas)
+
+    if proxima_pergunta is None:
+        return redirect(url_for("questionario"))
+
+    if fato != proxima_pergunta["fato"]:
+        flash("Pergunta inválida. Tente novamente.")
+        return redirect(url_for("questionario"))
 
     respostas[fato] = resposta == "sim"
 
@@ -129,3 +162,8 @@ def novo_diagnostico():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+app.config.update(
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE="Lax"
+)
