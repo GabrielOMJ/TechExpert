@@ -47,32 +47,6 @@ A base de conhecimento contém:
 
 Durante o processo, o sistema identifica quais regras foram aplicadas e apresenta explicações para os resultados obtidos, permitindo que o usuário compreenda o raciocínio utilizado.
 
-## Estrutura do projeto
-
-```text
-TechExpert/
-│
-├── sistema_especialista/
-│   ├── fatos.py
-│   ├── regras.py
-│   ├── motor_inferencia.py
-│   ├── explicacao.py
-│   └── questionario.py
-│
-├── static/
-│   └── ...
-│
-├── templates/
-│   └── ...
-│
-├── tests/
-│   └── ...
-│
-├── app.py
-├── requirements.txt
-├── .gitignore
-└── README.md
-```
 
 ## Instalação e execução
 
