@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Escolher diagnóstico | TechExpert</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>TechExpert</h1>
+            <span>ByteCare Tecnologia</span>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="painel">
+
+            <h2>Qual problema você está enfrentando?</h2>
+
+            <p>Selecione a categoria que melhor representa o problema do computador.</p>
+
+            <div class="categorias">
+
+                {% for identificador, nome in categorias.items() %}
+
+                    <form action="{{ url_for('iniciar_diagnostico', categoria=identificador) }}"
+                          method="POST">
+
+                        <button type="submit" class="categoria-card">
+                            {{ nome }}
+                        </button>
+
+                    </form>
+
+                {% endfor %}
+
+            </div>
+
+            <a href="{{ url_for('inicio') }}" class="link-voltar">
+                Voltar ao início
+            </a>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>TechExpert - ByteCare Tecnologia</p>
+        <p>Sistema de apoio ao diagnóstico de computadores</p>
+    </footer>
+
+</body>
+</html>

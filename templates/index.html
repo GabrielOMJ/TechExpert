@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TechExpert | ByteCare Tecnologia</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>TechExpert</h1>
+            <span>ByteCare Tecnologia</span>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="apresentacao">
+
+            <h2>Assistente inteligente de diagnóstico</h2>
+
+            <p>
+                Identifique possíveis problemas no seu computador
+                respondendo a algumas perguntas simples.
+            </p>
+
+            <p>
+                O TechExpert utiliza um sistema especialista
+                para analisar sintomas e apresentar possíveis
+                causas e recomendações.
+            </p>
+
+            <a href="{{ url_for('iniciar') }}" class="botao">
+                Iniciar diagnóstico
+            </a>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>TechExpert - ByteCare Tecnologia</p>
+        <p>Sistema de apoio ao diagnóstico de computadores</p>
+    </footer>
+
+</body>
+</html>

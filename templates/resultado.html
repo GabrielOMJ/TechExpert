@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resultado | TechExpert</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>TechExpert</h1>
+            <span>ByteCare Tecnologia</span>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="painel">
+
+            <h2>Resultado do diagnóstico</h2>
+
+            <p class="categoria-atual">{{ categoria }}</p>
+
+            {% if diagnosticos %}
+
+                <p>O TechExpert identificou as seguintes possibilidades:</p>
+
+                {% for diagnostico in diagnosticos %}
+
+                    <div class="resultado-card">
+
+                        <h3>{{ diagnostico.descricao }}</h3>
+
+                        {% for item in historico %}
+
+                            {% if item.conclusao == diagnostico.identificador %}
+
+                                <p>
+                                    <strong>Regra aplicada:</strong>
+                                    {{ item.regra }}
+                                </p>
+
+                                <p>
+                                    <strong>Explicação:</strong>
+                                    {{ item.explicacao }}
+                                </p>
+
+                                <p>
+                                    <strong>Recomendação:</strong>
+                                    {{ item.recomendacao }}
+                                </p>
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="resultado-card">
+                    <h3>Nenhuma conclusão específica foi encontrada.</h3>
+
+                    <p>
+                        As respostas fornecidas não satisfizeram
+                        as condições de nenhuma regra diagnóstica.
+                    </p>
+
+                    <p>
+                        Recomendamos procurar uma avaliação técnica
+                        para investigar o problema.
+                    </p>
+                </div>
+
+            {% endif %}
+
+            <p class="aviso">
+                Os resultados são possibilidades identificadas
+                pelo sistema especialista e não substituem
+                uma avaliação técnica presencial.
+            </p>
+
+            <a href="{{ url_for('novo_diagnostico') }}" class="botao">
+                Novo diagnóstico
+            </a>
+
+            <a href="{{ url_for('inicio') }}" class="link-voltar">
+                Página inicial
+            </a>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>TechExpert - ByteCare Tecnologia</p>
+        <p>Sistema de apoio ao diagnóstico de computadores</p>
+    </footer>
+
+</body>
+</html>

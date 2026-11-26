@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Questionário | TechExpert</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>TechExpert</h1>
+            <span>ByteCare Tecnologia</span>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="painel">
+
+            <p class="categoria-atual">{{ categoria }}</p>
+
+            <h2>Vamos analisar seu computador</h2>
+
+            <p class="progresso">
+                Pergunta {{ total_perguntas + 1 }}
+            </p>
+
+            <div class="pergunta">
+                <h3>{{ pergunta.texto }}</h3>
+            </div>
+
+            <form action="{{ url_for('responder') }}" method="POST">
+
+                <input type="hidden"
+                       name="fato"
+                       value="{{ pergunta.fato }}">
+
+                <div class="opcoes">
+
+                    <button type="submit"
+                            name="resposta"
+                            value="sim"
+                            class="botao">
+                        Sim
+                    </button>
+
+                    <button type="submit"
+                            name="resposta"
+                            value="nao"
+                            class="botao botao-secundario">
+                        Não
+                    </button>
+
+                </div>
+
+            </form>
+
+            <a href="{{ url_for('novo_diagnostico') }}"
+               class="link-voltar">
+                Cancelar diagnóstico
+            </a>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>TechExpert - ByteCare Tecnologia</p>
+        <p>Sistema de apoio ao diagnóstico de computadores</p>
+    </footer>
+
+</body>
+</html>
