@@ -47,11 +47,15 @@ A base de conhecimento contém:
 
 Durante o processo, o sistema identifica quais regras foram aplicadas e apresenta explicações para os resultados obtidos, permitindo que o usuário compreenda o raciocínio utilizado.
 
+## Requisitos de funcionamento
+
+- Python
 
 ## Instalação e execução
 
 ### 1. Clonar o repositório
 
+É necessário ter o Git baixado para a clonagem do repositório
 ```bash
 git clone https://github.com/GabrielOMJ/TechExpert.git
 ```
