@@ -106,6 +106,22 @@ http://127.0.0.1:5000
 
 ## Testes
 
+### Exemplo de diagnóstico com a regra R10
+
+Para reproduzir o cenário, inicie um diagnóstico e selecione **Temperatura e refrigeração**.
+
+| Sintoma perguntado | Resposta |
+|---|---|
+| Temperatura elevada | Sim |
+| Desligamento durante atividades exigentes | Não |
+| Ventoinha parada | Sim |
+| Ruído anormal nas ventoinhas | Não |
+| Lentidão no computador | Não |
+
+**Resultado observado:** o TechExpert indicou uma possível falha no sistema de ventilação e recomendou a avaliação técnica das ventoinhas.
+
+Na tela de resultado, o sistema mostrou que aplicou a regra **R10** porque duas condições foram atendidas ao mesmo tempo: o computador apresentava temperatura elevada e uma ventoinha não estava girando.
+
 O projeto passou por uma etapa de validação para verificar o funcionamento das funcionalidades implementadas.
 
 Foram realizados **18 testes**, todos aprovados, sem apresentar erros durante a execução.
