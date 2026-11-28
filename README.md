@@ -50,7 +50,8 @@ Durante o processo, o sistema identifica quais regras foram aplicadas e apresent
 ## Requisitos de funcionamento
 
 - Python
-
+- Git
+  
 ## Instalação e execução
 
 ### 1. Clonar o repositório
